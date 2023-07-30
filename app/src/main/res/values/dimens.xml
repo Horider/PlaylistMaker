@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="primary_text_size">22sp</dimen>
+    <dimen name="width_button_activity_main">328dp</dimen>
+    <dimen name="width_setting_text">300dp</dimen>
+    <dimen name="width_button_activity_settings">48dp</dimen>
+    <dimen name="height_button_activity_settings">48dp</dimen>
+    <dimen name="height_button_activity_main">0dp</dimen>
 </resources>

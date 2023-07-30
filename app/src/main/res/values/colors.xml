@@ -9,6 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="background_main_menu">#3772E7</color>
     <color name="black_icon">#1A1B22</color>
-    <color name="color_text">#1A1B22</color>
-    <color name="text_icon_menu">#AEAFB4</color>
+    <color name="color_text_activity_settings">#1A1B22</color>
+    <color name="text_icon_activity_settings">#AEAFB4</color>
 </resources>
