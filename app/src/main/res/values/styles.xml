@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="MainButtonStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:layout_marginEnd">16dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/dark_blue</item>
+        <item name="cornerRadius">16dp</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">3sp</item>
+        <item name="iconTint">@color/dark_blue</item>
+    </style>
+
+    <style name="SettingTextStyle">
+        <item name="android:layout_width">300dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_weight">4</item>
+        <item name="android:paddingStart">20dp</item>
+        <item name="android:textColor">@color/dark_blue</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="SettingButtonStyle">
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">3sp</item>
+    </style>
+
+    <style name="SettingButtonStyleWithGrayColorIcon" parent="SettingButtonStyle">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_weight">1</item>
+        <item name="iconTint">@color/gray</item>
+    </style>
+
+</resources>

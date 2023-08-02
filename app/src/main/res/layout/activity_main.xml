@@ -7,16 +7,15 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/general_header"
+        android:id="@+id/generalHeaderLayout"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/general_name"
+            android:id="@+id/generalNameView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
             android:paddingStart="12dp"
             android:paddingTop="10dp"
             android:text="@string/name_project"
@@ -25,53 +24,26 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/search_button"
-        android:layout_width="@dimen/width_button_activity_main"
-        android:layout_height="@dimen/height_button_activity_main"
-        android:layout_gravity="center"
+        android:id="@+id/searchButton"
+        style="@style/MainButtonStyle"
         android:layout_marginTop="20dp"
-        android:layout_weight="1"
-        android:backgroundTint="@color/white"
         android:text="@string/search"
-        android:textColor="@color/color_text_activity_settings"
-        app:cornerRadius="16dp"
-        app:icon="@drawable/search_light_mode"
-        app:iconGravity="textStart"
-        app:iconPadding="3sp"
-        app:iconTint="@color/black_icon" />
+        app:icon="@drawable/search_light_mode" />
 
     <Button
-        android:id="@+id/mediateka_button"
-        android:layout_width="@dimen/width_button_activity_main"
-        android:layout_height="@dimen/height_button_activity_main"
-        android:layout_gravity="center"
+        android:id="@+id/mediatekaButton"
+        style="@style/MainButtonStyle"
         android:layout_marginTop="10dp"
-        android:layout_weight="1"
-        android:backgroundTint="@color/white"
         android:text="@string/mediateka"
-        android:textColor="@color/color_text_activity_settings"
-        app:cornerRadius="16dp"
-        app:icon="@drawable/library"
-        app:iconGravity="textStart"
-        app:iconPadding="3sp"
-        app:iconTint="@color/black_icon" />
+        app:icon="@drawable/library" />
 
     <Button
-        android:id="@+id/setting_button"
-        android:layout_width="@dimen/width_button_activity_main"
-        android:layout_height="@dimen/height_button_activity_main"
-        android:layout_gravity="center"
+        android:id="@+id/settingButton"
+        style="@style/MainButtonStyle"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"
-        android:layout_weight="1"
-        android:backgroundTint="@color/white"
         android:text="@string/settings"
-        android:textColor="@color/color_text_activity_settings"
-        app:cornerRadius="16dp"
-        app:icon="@drawable/setting"
-        app:iconGravity="textStart"
-        app:iconPadding="3sp"
-        app:iconTint="@color/black_icon" />
+        app:icon="@drawable/setting" />
 
 </LinearLayout>
 

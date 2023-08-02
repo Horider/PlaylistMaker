@@ -8,37 +8,32 @@
 
 
     <LinearLayout
-        android:id="@+id/general_header"
+        android:id="@+id/generalHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         tools:ignore="MissingConstraints">
 
         <Button
-            android:id="@+id/back_button"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:backgroundTint="@color/white"
+            android:id="@+id/backButtonHeader"
+            style="@style/SettingButtonStyle"
             app:icon="@drawable/main_setting_light_mode"
-            app:iconGravity="textStart"
-            app:iconPadding="3sp"
-            app:iconTint="@color/black_icon" />
+            app:iconTint="@color/dark_blue" />
 
         <TextView
-            android:id="@+id/setting"
+            android:id="@+id/settingTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:paddingStart="20dp"
             android:text="@string/settings"
-            android:textColor="@color/color_text_activity_settings"
+            android:textColor="@color/dark_blue"
             android:textSize="26sp" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/switchThemeLayout"
         android:layout_width="match_parent"
         android:layout_height="61dp"
         android:layout_gravity="center"
@@ -46,14 +41,9 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:layout_width="@dimen/width_setting_text"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="4"
-            android:paddingStart="20dp"
-            android:text="@string/black_theme"
-            android:textColor="@color/color_text_activity_settings"
-            android:textSize="16sp" />
+            android:id="@+id/blackThemeText"
+            style="@style/SettingTextStyle"
+            android:text="@string/black_theme" />
 
         <Switch
             android:id="@+id/switchThemes"
@@ -65,92 +55,56 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
+        android:id="@+id/shareLayout"
         android:layout_width="match_parent"
         android:layout_height="61dp"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+        app:layout_constraintTop_toBottomOf="@+id/switchThemeLayout">
 
         <TextView
-            android:layout_width="@dimen/width_setting_text"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="4"
-            android:paddingStart="20dp"
-            android:text="@string/share_the_app"
-            android:textColor="@color/color_text_activity_settings"
-            android:textSize="16sp" />
+            android:id="@+id/shareTheApp"
+            style="@style/SettingTextStyle"
+            android:text="@string/share_the_app" />
 
         <Button
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="@dimen/width_button_activity_settings"
-            android:layout_height="@dimen/height_button_activity_settings"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:backgroundTint="@color/white"
-            app:icon="@drawable/share_light_mode"
-            app:iconGravity="textStart"
-            app:iconPadding="3sp"
-            app:iconTint="@color/text_icon_activity_settings" />
+            android:id="@+id/shareButton"
+            style="@style/SettingButtonStyleWithGrayColorIcon"
+            app:icon="@drawable/share_light_mode" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout3"
+        android:id="@+id/supportLayout"
         android:layout_width="match_parent"
         android:layout_height="61dp"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+        app:layout_constraintTop_toBottomOf="@+id/shareLayout">
 
         <TextView
-            android:layout_width="@dimen/width_setting_text"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="4"
-            android:paddingStart="20dp"
-            android:text="@string/write_to_support"
-            android:textColor="@color/color_text_activity_settings"
-            android:textSize="16sp" />
+            android:id="@+id/writeToSupport"
+            style="@style/SettingTextStyle"
+            android:text="@string/write_to_support" />
 
         <Button
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="@dimen/width_button_activity_settings"
-            android:layout_height="@dimen/height_button_activity_settings"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:backgroundTint="@color/white"
-            app:icon="@drawable/support_light_mode"
-            app:iconGravity="textStart"
-            app:iconPadding="3sp"
-            app:iconTint="@color/text_icon_activity_settings" />
+            android:id="@+id/supportButton"
+            style="@style/SettingButtonStyleWithGrayColorIcon"
+            app:icon="@drawable/support_light_mode" />
 
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/userAgreementLayout"
         android:layout_width="match_parent"
         android:layout_height="61dp"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+        app:layout_constraintTop_toBottomOf="@+id/supportLayout">
 
         <TextView
-            android:layout_width="@dimen/width_setting_text"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="4"
-            android:paddingStart="20dp"
-            android:text="@string/user_agreement"
-            android:textColor="@color/color_text_activity_settings"
-            android:textSize="16sp" />
+            android:id="@+id/userAgreementView"
+            style="@style/SettingTextStyle"
+            android:text="@string/user_agreement" />
 
         <Button
-            android:id="@+id/user_agreement_button"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="@dimen/width_button_activity_settings"
-            android:layout_height="@dimen/height_button_activity_settings"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:backgroundTint="@color/white"
-            app:icon="@drawable/arrow_forward_light_mode"
-            app:iconGravity="textStart"
-            app:iconPadding="3sp"
-            app:iconTint="@color/text_icon_activity_settings" />
+            android:id="@+id/userAgreementButton"
+            style="@style/SettingButtonStyleWithGrayColorIcon"
+            app:icon="@drawable/arrow_forward_light_mode" />
 
     </LinearLayout>
 
