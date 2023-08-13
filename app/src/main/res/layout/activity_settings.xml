@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white">
+    android:layout_height="match_parent">
 
 
     <LinearLayout
@@ -16,19 +15,14 @@
 
         <Button
             android:id="@+id/backButtonHeader"
-            style="@style/SettingButtonStyle"
-            app:icon="@drawable/main_setting_light_mode"
-            app:iconTint="@color/dark_blue" />
+            style="@style/SettingHeaderButtonStyle"
+            app:icon="@drawable/main_setting_light_mode" />
 
         <TextView
             android:id="@+id/settingTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            style="@style/MessageTextStyle"
             android:paddingStart="20dp"
-            android:text="@string/settings"
-            android:textColor="@color/dark_blue"
-            android:textSize="26sp" />
+            android:text="@string/settings" />
 
     </LinearLayout>
 
