@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@style/Theme.PlaylistMaker"
-    android:orientation="vertical">
+    android:background="?attr/colorPrimary"
+    android:orientation="vertical"
+    android:theme="@style/Theme.PlaylistMaker">
 
     <LinearLayout
         android:id="@+id/generalHeaderLayout"
@@ -14,30 +15,31 @@
 
         <TextView
             android:id="@+id/generalNameView"
-            style="@style/MessageTextStyle"
-            android:textColor="@color/YP_White"
+            style="@style/headerTxtStyle"
+            android:layout_gravity="start"
             android:paddingStart="12dp"
             android:paddingTop="10dp"
-            android:text="@string/name_project" />
+            android:text="@string/name_project"
+            android:textColor="@color/white" />
     </LinearLayout>
 
     <Button
         android:id="@+id/searchButton"
-        style="@style/MainButtonStyle"
+        style="@style/mainLayoutButtonStyle"
         android:layout_marginTop="20dp"
         android:text="@string/search"
         app:icon="@drawable/search_light_mode" />
 
     <Button
         android:id="@+id/mediatekaButton"
-        style="@style/MainButtonStyle"
+        style="@style/mainLayoutButtonStyle"
         android:layout_marginTop="10dp"
         android:text="@string/mediateka"
         app:icon="@drawable/library" />
 
     <Button
         android:id="@+id/settingButton"
-        style="@style/MainButtonStyle"
+        style="@style/mainLayoutButtonStyle"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"
         android:text="@string/settings"

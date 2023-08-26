@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="MessageTextStyle">
+    <style name="headerTxtStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
         <item name="android:textColor">@color/YP_Black</item>
         <item name="android:textAlignment">center</item>
         <item name="android:textSize">22sp</item>
@@ -11,14 +12,14 @@
         <item name="android:textFontWeight">500</item>
     </style>
 
-    <style name="MainButtonStyle">
+    <style name="mainLayoutButtonStyle" parent="Widget.MaterialComponents.Button.UnelevatedButton">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">0dp</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:layout_marginStart">16dp</item>
         <item name="android:layout_marginEnd">16dp</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:backgroundTint">@color/YP_White</item>
+        <item name="android:backgroundTint">@color/white</item>
         <item name="android:textSize">22sp</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textColor">@color/YP_Black</item>
@@ -30,7 +31,7 @@
         <item name="iconTint">@color/YP_Black</item>
     </style>
 
-    <style name="SettingTextStyle">
+    <style name="settingLayoutTxtStyle">
         <item name="android:layout_width">300dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center</item>
@@ -42,23 +43,50 @@
         <item name="android:textFontWeight">400</item>
     </style>
 
-    <style name="SettingButtonStyle">
+    <style name="settingLayoutButtonStyle">
         <item name="android:background">?android:attr/selectableItemBackground</item>
         <item name="android:layout_width">48dp</item>
         <item name="android:layout_height">48dp</item>
-        <item name="android:backgroundTint">@color/YP_White</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:backgroundTint">@color/white</item>
         <item name="iconGravity">textStart</item>
         <item name="iconPadding">3sp</item>
     </style>
 
-    <style name="SettingButtonStyleWithGrayColorIcon" parent="SettingButtonStyle">
-        <item name="android:layout_gravity">center</item>
+    <style name="settingButtonStyleWithGrayColorIcon" parent="settingLayoutButtonStyle">
         <item name="android:layout_weight">1</item>
         <item name="iconTint">@color/gray</item>
     </style>
 
-    <style name="SettingHeaderButtonStyle" parent="SettingButtonStyle">
+    <style name="settingHeaderButtonStyle" parent="settingLayoutButtonStyle">
         <item name="iconTint">@color/YP_Black</item>
+    </style>
+
+    <style name="searchButtonStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:backgroundTint">@color/YP_Light_Gray</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/YP_Black</item>
+        <item name="android:fontFamily">@font/ys_display_medium</item>
+        <item name="android:textFontWeight">500</item>
+        <item name="cornerRadius">16dp</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">3sp</item>
+        <item name="iconTint">@color/YP_Black</item>
+    </style>
+
+    <style name="searchActivityEditTxt">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@null</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:paddingHorizontal">16dp</item>
+        <item name="android:drawablePadding">8dp</item>
+        <item name="android:fontFamily">@font/ys_display_regular</item>
+        <item name="android:textColorHint">@color/gray</item>
+        <item name="android:drawableStart">@drawable/search_icon_gray</item>
     </style>
 
 </resources>

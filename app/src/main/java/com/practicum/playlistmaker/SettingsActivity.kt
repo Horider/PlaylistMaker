@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 
@@ -25,24 +26,24 @@ class SettingsActivity : AppCompatActivity() {
             val shareIntent = Intent(Intent.ACTION_SEND)
             shareIntent.type = "text/plain"
             shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Playlist Maker")
-            val shareMessage = "https://practicum.yandex.ru/profile/android-developer/"
+            val shareMessage = getString(R.string.android_development_course)
             shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage)
             startActivity(Intent.createChooser(shareIntent, "Поделиться приложением"))
         }
 
         supportButton.setOnClickListener {
-            val message = "Спасибо разработчикам и разработчицам за крутое приложение!"
-            val subjectMessage = "Сообщение разработчикам и разработчицам приложения Playlist Maker"
+            val message = getString(R.string.text_letter)
+            val subjectMessage = getString(R.string.subject_letter)
             val shareIntent = Intent(Intent.ACTION_SENDTO)
-            shareIntent.type = "text/html"
-            shareIntent.putExtra(Intent.EXTRA_EMAIL, "horider@yandex.ru")
+            shareIntent.data = Uri.parse("mailto:")
+            shareIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(getString(R.string.email_to)))
             shareIntent.putExtra(Intent.EXTRA_SUBJECT, subjectMessage)
             shareIntent.putExtra(Intent.EXTRA_TEXT, message)
             startActivity(Intent.createChooser(shareIntent, "Отправить сообщение"))
         }
 
         userAgreementButton.setOnClickListener {
-            val linkUserAgreement = "https://yandex.ru/legal/practicum_offer/"
+            val linkUserAgreement = getString(R.string.practicum_offer)
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(linkUserAgreement))
             startActivity(intent)
         }
