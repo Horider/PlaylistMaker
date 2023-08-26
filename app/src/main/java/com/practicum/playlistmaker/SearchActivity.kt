@@ -1,7 +1,6 @@
 package com.practicum.playlistmaker
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -10,11 +9,12 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 
 class SearchActivity : AppCompatActivity() {
 
     private lateinit var inputEditText: EditText
-    private val KEY_EDIT_TEXT_VALUE = "key_edit_text_value"
+    private var searchText: String = "" // Глобальная переменная для хранения текста поискового запроса
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +40,8 @@ class SearchActivity : AppCompatActivity() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Обновляем глобальную переменную searchText новым значением
+                searchText = s.toString()
             }
 
             override fun afterTextChanged(s: Editable?) {
@@ -47,6 +49,10 @@ class SearchActivity : AppCompatActivity() {
                 buttonClear.visibility = if (s?.isNotEmpty() == true) View.VISIBLE else View.GONE
             }
         })
+    }
+
+    companion object {
+        const val KEY_EDIT_TEXT_VALUE = "KEY_EDIT_TEXT_VALUE"
     }
 
     // Сохраняем текущее значение EditText в Bundle
