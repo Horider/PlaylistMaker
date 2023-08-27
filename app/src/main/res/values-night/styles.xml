@@ -74,4 +74,11 @@
         <item name="android:drawableStart">@drawable/search_icon_black</item>
     </style>
 
+    <style name="buttonClearStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:src">@drawable/clear_black</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
 </resources>
