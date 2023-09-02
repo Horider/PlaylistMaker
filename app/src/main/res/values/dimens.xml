@@ -6,4 +6,6 @@
     <dimen name="width_button_activity_settings">48dp</dimen>
     <dimen name="height_button_activity_settings">48dp</dimen>
     <dimen name="height_button_activity_main">0dp</dimen>
+    <dimen name="padding_8">8dp</dimen>
+    <dimen name="text_11">11sp</dimen>
 </resources>

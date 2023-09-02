@@ -13,4 +13,8 @@
     <string name="text_letter">Спасибо разработчикам и разработчицам за крутое приложение!</string>
     <string name="subject_letter">Сообщение разработчикам и разработчицам приложения Playlist Maker</string>
     <string name="email_to">Horider@yandex.ru</string>
+    <string name="album_logo">album_logo</string>
+    <string name="track_name">Track name</string>
+    <string name="track_author">Track author</string>
+    <string name="track_time">2:44</string>
 </resources>
