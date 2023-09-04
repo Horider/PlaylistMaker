@@ -96,4 +96,9 @@
         <item name="android:visibility">gone</item>
     </style>
 
+    <style name="albumImageStyle">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+    </style>
+
 </resources>
