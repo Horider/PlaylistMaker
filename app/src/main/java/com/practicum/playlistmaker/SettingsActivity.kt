@@ -3,26 +3,25 @@ package com.practicum.playlistmaker
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.widget.Button
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.practicum.playlistmaker.databinding.ActivityMediatekaBinding
+import com.practicum.playlistmaker.databinding.ActivitySettingsBinding
 
 
 class SettingsActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivitySettingsBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_settings)
+        binding = ActivitySettingsBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
-        val backButton = findViewById<Button>(R.id.backButtonHeader)
-        val shareButton = findViewById<Button>(R.id.shareButton)
-        val supportButton = findViewById<Button>(R.id.supportButton)
-        val userAgreementButton = findViewById<Button>(R.id.userAgreementButton)
-
-        backButton.setOnClickListener {
+        binding.backButtonHeader.setOnClickListener {
             finish()
         }
 
-        shareButton.setOnClickListener {
+        binding.shareButton.setOnClickListener {
             val shareIntent = Intent(Intent.ACTION_SEND)
             shareIntent.type = "text/plain"
             shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Playlist Maker")
@@ -31,7 +30,7 @@ class SettingsActivity : AppCompatActivity() {
             startActivity(Intent.createChooser(shareIntent, "Поделиться приложением"))
         }
 
-        supportButton.setOnClickListener {
+        binding.supportButton.setOnClickListener {
             val message = getString(R.string.text_letter)
             val subjectMessage = getString(R.string.subject_letter)
             val shareIntent = Intent(Intent.ACTION_SENDTO)
@@ -42,7 +41,7 @@ class SettingsActivity : AppCompatActivity() {
             startActivity(Intent.createChooser(shareIntent, "Отправить сообщение"))
         }
 
-        userAgreementButton.setOnClickListener {
+        binding.userAgreementButton.setOnClickListener {
             val linkUserAgreement = getString(R.string.practicum_offer)
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(linkUserAgreement))
             startActivity(intent)

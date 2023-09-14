@@ -20,7 +20,7 @@
 
         <TextView
             android:id="@+id/settingTxtView"
-            style="@style/headerTxtStyle"
+            style="@style/mainLayoutHeaderTextStyle"
             android:paddingStart="20dp"
             android:text="@string/settings" />
 
@@ -36,7 +36,7 @@
 
         <TextView
             android:id="@+id/blackThemeText"
-            style="@style/settingLayoutTxtStyle"
+            style="@style/settingLayoutTextStyle"
             android:text="@string/black_theme" />
 
         <Switch
@@ -56,7 +56,7 @@
 
         <TextView
             android:id="@+id/shareTheApp"
-            style="@style/settingLayoutTxtStyle"
+            style="@style/settingLayoutTextStyle"
             android:text="@string/share_the_app" />
 
         <Button
@@ -74,7 +74,7 @@
 
         <TextView
             android:id="@+id/writeToSupport"
-            style="@style/settingLayoutTxtStyle"
+            style="@style/settingLayoutTextStyle"
             android:text="@string/write_to_support" />
 
         <Button
@@ -92,7 +92,7 @@
 
         <TextView
             android:id="@+id/userAgreementView"
-            style="@style/settingLayoutTxtStyle"
+            style="@style/settingLayoutTextStyle"
             android:text="@string/user_agreement" />
 
         <Button

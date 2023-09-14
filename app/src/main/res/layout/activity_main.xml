@@ -15,7 +15,7 @@
 
         <TextView
             android:id="@+id/generalNameView"
-            style="@style/headerTxtStyle"
+            style="@style/mainLayoutHeaderTextStyle"
             android:layout_gravity="start"
             android:paddingStart="12dp"
             android:paddingTop="10dp"

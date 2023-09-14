@@ -10,7 +10,7 @@
 
     <ImageView
         android:id="@+id/albumImage"
-        style="@style/albumImageStyle"
+        style="@style/searchActivityAlbumImageStyle"
         android:src="@drawable/ic_placeholder"
         android:contentDescription="@string/album_logo"/>
 

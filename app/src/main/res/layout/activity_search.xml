@@ -19,7 +19,7 @@
 
         <TextView
             android:id="@+id/searchTxtView"
-            style="@style/headerTxtStyle"
+            style="@style/mainLayoutHeaderTextStyle"
             android:layout_gravity="center"
             android:paddingStart="18dp"
             android:text="@string/search" />
@@ -30,11 +30,10 @@
         android:layout_height="48dp"
         android:layout_margin="16dp"
         android:background="@drawable/background_grey">
-<!--        style="@style/searchFrameLayout">-->
 
         <EditText
             android:id="@+id/inputEditText"
-            style="@style/searchActivityEditTxt"
+            style="@style/searchActivityEditTextStyle"
             android:hint="@string/search"
             android:textColor="@color/black"
             android:imeOptions="actionDone"
@@ -44,7 +43,7 @@
 
         <ImageView
             android:id="@+id/buttonClear"
-            style="@style/buttonClearStyle"
+            style="@style/searchActivityButtonClearStyle"
             android:layout_gravity="center|end"
             android:paddingEnd="16dp" />
 
@@ -55,8 +54,37 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:itemCount="5"
-        tools:listitem="@layout/track" />
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+    <LinearLayout
+        android:id="@+id/placeholder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/padding_48"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/placeholderImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_failure" />
+
+        <TextView
+            android:id="@+id/placeholderText"
+            style="@style/searchActivityFailureTextStyle"
+            android:text="@string/failure_text"
+            android:textColor="?attr/colorPrimaryVariant"
+            android:textFontWeight="400"/>
+
+        <Button
+            android:id="@+id/buttonUpdate"
+            style="@style/searchActivityButtonUpdateStyle"
+            android:text="@string/update"
+            android:textColor="?attr/colorOnBackground"
+            android:backgroundTint="?attr/colorPrimaryVariant"/>
+    </LinearLayout>
 
 </LinearLayout>
