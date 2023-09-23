@@ -1,13 +1,13 @@
 package com.practicum.playlistmaker
 
 import android.content.Context
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import androidx.appcompat.app.AppCompatActivity
 import com.practicum.playlistmaker.databinding.ActivitySearchBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -15,10 +15,9 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class SearchActivity : AppCompatActivity() {
 
-    private var searchText: String = "" // Переменная для хранения текста поискового запроса
-    private var lastSearchQuery: String = "" // Переменная для хранения последнего поискового запроса
+class SearchActivity : AppCompatActivity() {
+    private var textEditText = ""
     private lateinit var binding: ActivitySearchBinding
 
     private val itunesBaseUrl = "https://itunes.apple.com/"
@@ -32,13 +31,16 @@ class SearchActivity : AppCompatActivity() {
     private val tracks = ArrayList<Track>()
     private val adapter = TrackAdapter()
 
-    private val callback = object : Callback<TracksResponse> {
-        override fun onResponse(call: Call<TracksResponse>, response: Response<TracksResponse>) {
-            if (response.isSuccessful) {
+    private val callback = object: Callback<TracksResponse> {
+
+        override fun onResponse(
+            call: Call<TracksResponse>,
+            response: Response<TracksResponse>
+        ) {
+            if(response.code() == 200) {
                 tracks.clear()
-                val results = response.body()?.results
-                if (results?.isNotEmpty() == true) {
-                    tracks.addAll(results)
+                if (response.body()?.results?.isNotEmpty() == true){
+                    tracks.addAll(response.body()?.results!!)
                     showSearchResult(StatusSearch.SUCCESS)
                 }
                 if (tracks.isEmpty()) {
@@ -63,80 +65,74 @@ class SearchActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        binding.backButtonHeader.setOnClickListener {
+        binding.buttonBack.setOnClickListener {
             finish()
         }
 
         binding.buttonClear.setOnClickListener {
-            binding.inputEditText.text.clear()
-            hideKeyboard()
+            binding.inputEditText.setText("")
+            it.hideKeyboard()
+            tracks.clear()
+            adapter.notifyDataSetChanged()
             binding.placeholder.visibility = View.GONE
         }
 
-        // Добавление TextWatcher для EditText
-        binding.inputEditText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
+        val textWatcher = object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                // Обновляем глобальную переменную searchText новым значением
-                searchText = s.toString()
+                binding.buttonClear.visibility = clearButtonVisibility(s)
+                textEditText = binding.inputEditText.text.toString()
             }
 
-            override fun afterTextChanged(s: Editable?) {
-                // Если текст пуст, скрываем кнопку очистки, иначе показываем
-                binding.buttonClear.visibility =
-                    if (s?.isNotEmpty() == true) View.VISIBLE else View.GONE
-            }
-        })
+            override fun afterTextChanged(s: Editable?) {}
+        }
+
+        binding.inputEditText.addTextChangedListener(textWatcher)
 
         adapter.tracks = tracks
         binding.rvSearchList.adapter = adapter
 
         binding.inputEditText.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                val query = binding.inputEditText.text.toString()
-                if (query.isNotEmpty()) {
-                    lastSearchQuery = query // Обновляем lastSearchQuery перед отправкой запроса
-                    itunesSearchService.search(query).enqueue(callback)
+                if (binding.inputEditText.text.isNotEmpty()){
+                    itunesSearchService.search(binding.inputEditText.text.toString()).enqueue(callback)
                 }
-                hideKeyboard()
                 true
-            } else false
+            }
+            false
         }
 
         binding.buttonUpdate.setOnClickListener {
-            if (lastSearchQuery.isNotEmpty()) {
-                itunesSearchService.search(lastSearchQuery).enqueue(callback)
-            }
+            itunesSearchService.search(binding.inputEditText.text.toString()).enqueue(callback)
         }
     }
 
-    companion object {
-        const val KEY_EDIT_TEXT_VALUE = "KEY_EDIT_TEXT_VALUE"
-    }
-
-    // Сохраняем текущее значение EditText в Bundle
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putString(KEY_EDIT_TEXT_VALUE, binding.inputEditText.text.toString())
+        outState.putString(TEXT_KEY, textEditText)
     }
 
-    // Восстанавливаем значение EditText из Bundle
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        val savedText = savedInstanceState.getString(KEY_EDIT_TEXT_VALUE) ?: ""
-        binding.inputEditText.setText(savedText)
+        textEditText = savedInstanceState.getString(TEXT_KEY, "")
+        binding.inputEditText.setText(textEditText)
     }
 
-    // Функция для скрытия клавиатуры
-    private fun hideKeyboard() {
-        val imm: InputMethodManager =
-            getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+    private fun clearButtonVisibility(s: CharSequence?): Int {
+        return if (s.isNullOrEmpty()) {
+            View.GONE
+        } else {
+            View.VISIBLE
+        }
     }
 
-    private fun showSearchResult(searchStatus: StatusSearch) {
+    private fun View.hideKeyboard () {
+        val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+        inputMethodManager?.hideSoftInputFromWindow(windowToken, 0)
+    }
+
+    private fun showSearchResult (searchStatus: StatusSearch) {
         when (searchStatus) {
             StatusSearch.EMPTY_SEARCH -> {
                 adapter.notifyDataSetChanged()
@@ -144,8 +140,8 @@ class SearchActivity : AppCompatActivity() {
                 binding.placeholderImage.setImageResource(R.drawable.ic_nothing_found)
                 binding.placeholderText.setText(R.string.nothing_found)
                 binding.buttonUpdate.visibility = View.GONE
-            }
 
+            }
             StatusSearch.SEARCH_FAILURE -> {
                 adapter.notifyDataSetChanged()
                 binding.placeholder.visibility = View.VISIBLE
@@ -153,10 +149,13 @@ class SearchActivity : AppCompatActivity() {
                 binding.placeholderText.setText(R.string.failure_text)
                 binding.buttonUpdate.visibility = View.VISIBLE
             }
-
             StatusSearch.SUCCESS -> {
                 adapter.notifyDataSetChanged()
             }
         }
+    }
+
+    private companion object {
+        const val TEXT_KEY = "TEXT_KEY"
     }
 }
