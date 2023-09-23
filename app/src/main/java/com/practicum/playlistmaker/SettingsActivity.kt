@@ -40,16 +40,26 @@ class SettingsActivity : AppCompatActivity() {
             shareIntent.putExtra(Intent.EXTRA_SUBJECT, subject)
             shareIntent.putExtra(Intent.EXTRA_TEXT, message)
             startActivity(Intent.createChooser(shareIntent, "Отправить сообщение"))
+        }
 
-            binding.buttonTerms.setOnClickListener {
-                startActivity(
-                    Intent(
-                        Intent.ACTION_VIEW,
-                        Uri.parse("https://yandex.ru/legal/practicum_offer/")
-                    )
+        binding.buttonTerms.setOnClickListener {
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("https://yandex.ru/legal/practicum_offer/")
                 )
-            }
+            )
+        }
 
+        val sheredPref = getSharedPreferences(DARK_THEME_SETTINGS, MODE_PRIVATE)
+
+        binding.themeSwitcher.isChecked = sheredPref.getBoolean(DARK_THEME_KEY, false)
+
+        binding.themeSwitcher.setOnCheckedChangeListener { switcher, checked ->
+            (applicationContext as App).switchTheme(checked)
+            sheredPref.edit()
+                .putBoolean(DARK_THEME_KEY, binding.themeSwitcher.isChecked)
+                .apply()
         }
     }
 }
