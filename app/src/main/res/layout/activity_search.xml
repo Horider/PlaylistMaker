@@ -1,28 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:theme="@style/Theme.PlaylistMaker">
+    android:paddingTop="14dp"
+    android:background="?attr/colorOnBackground">
 
     <LinearLayout
-        android:id="@+id/general_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/back_button_header"
-            style="@style/settingHeaderButtonStyle"
-            app:icon="@drawable/main_setting_light_mode" />
+        <ImageView
+            android:id="@+id/buttonBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:contentDescription="@string/search"
+            android:paddingStart="@dimen/padding_20"
+            android:src="@drawable/back"
+            app:tint="?attr/colorPrimaryVariant" />
 
         <TextView
-            android:id="@+id/search_text_view"
-            style="@style/mainLayoutHeaderTextStyle"
-            android:layout_gravity="center"
-            android:paddingStart="18dp"
-            android:text="@string/search" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ys_display_medium"
+            android:paddingStart="@dimen/padding_48"
+            android:text="@string/search"
+            android:textColor="?attr/colorPrimaryVariant"
+            android:textFontWeight="500"
+            android:textSize="@dimen/text_22" />
     </LinearLayout>
 
     <FrameLayout
@@ -32,25 +41,39 @@
         android:background="@drawable/background_grey">
 
         <EditText
-            android:id="@+id/input_edit_text"
-            style="@style/searchActivityEditTextStyle"
+            android:id="@+id/inputEditText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="@dimen/padding_16"
             android:hint="@string/search"
-            android:textColor="@color/black"
-            android:imeOptions="actionDone"
-            android:inputType="text"
+            android:lines="1"
             android:maxLength="100"
-            android:maxLines="1" />
+            android:inputType="text"
+            android:drawableStart="@drawable/search_icon"
+            android:drawableTint="?attr/colorSecondary"
+            android:drawablePadding="8dp"
+            android:textColor="@color/black"
+            android:textColorHint="?attr/colorSecondary"
+            android:fontFamily="@font/ys_display_regular"
+            android:textSize="@dimen/text_16"
+            android:background="@null"
+            android:imeOptions="actionDone"
+            android:singleLine="true"/>
 
         <ImageView
-            android:id="@+id/button_clear"
-            style="@style/searchActivityButtonClearStyle"
+            android:id="@+id/buttonClear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center|end"
-            android:paddingEnd="16dp" />
+            android:backgroundTint="?attr/colorSecondary"
+            android:src="@drawable/clear"
+            android:paddingEnd="@dimen/padding_16"
+            android:visibility="gone"/>
 
     </FrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_search_list"
+        android:id="@+id/rvSearchList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -58,33 +81,45 @@
 
     <LinearLayout
         android:id="@+id/placeholder"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="vertical"
         android:paddingTop="@dimen/padding_48"
+        android:gravity="center"
+        android:orientation="vertical"
         android:visibility="gone">
 
         <ImageView
-            android:id="@+id/placeholder_image"
+            android:id="@+id/placeholderImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_failure"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:id="@+id/placeholderText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/padding_48"
+            android:text="@string/failure_text"
+            android:textColor="?attr/colorPrimaryVariant"
+            android:textSize="@dimen/text_19"
+            android:fontFamily="@font/ys_display_medium"
+            android:textFontWeight="400"/>
+        
+        <Button
+            android:id="@+id/buttonUpdate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/ic_failure" />
-
-        <TextView
-            android:id="@+id/placeholder_text"
-            style="@style/searchActivityFailureTextStyle"
-            android:text="@string/failure_text"
-            android:textColor="?attr/colorPrimaryVariant"
-            android:textFontWeight="400"/>
-
-        <Button
-            android:id="@+id/button_update"
-            style="@style/searchActivityButtonUpdateStyle"
+            app:cornerRadius="@dimen/corner_56"
             android:text="@string/update"
+            android:textSize="@dimen/text_14"
+            android:fontFamily="@font/ys_display_medium"
+            android:textFontWeight="400"
             android:textColor="?attr/colorOnBackground"
             android:backgroundTint="?attr/colorPrimaryVariant"/>
+
     </LinearLayout>
 
 </LinearLayout>
