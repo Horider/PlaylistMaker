@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="headerTxtStyle">
+    <style name="mainLayoutHeaderTextStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center</item>
@@ -12,7 +12,7 @@
         <item name="android:textFontWeight">500</item>
     </style>
 
-    <style name="mainLayoutButtonStyle" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+    <style name="mainLayoutButtonStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">0dp</item>
         <item name="android:layout_gravity">center</item>
@@ -31,7 +31,7 @@
         <item name="iconTint">@color/YP_Black</item>
     </style>
 
-    <style name="settingLayoutTxtStyle">
+    <style name="settingLayoutTextStyle">
         <item name="android:layout_width">300dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center</item>
@@ -77,7 +77,7 @@
         <item name="iconTint">@color/YP_Black</item>
     </style>
 
-    <style name="searchActivityEditTxt">
+    <style name="searchActivityEditTextStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:background">@null</item>
@@ -89,16 +89,35 @@
         <item name="android:drawableStart">@drawable/search_icon_gray</item>
     </style>
 
-    <style name="buttonClearStyle">
+    <style name="commonSearchActivityStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="searchActivityButtonClearStyle" parent="commonSearchActivityStyle">
         <item name="android:src">@drawable/clear_grey</item>
         <item name="android:visibility">gone</item>
     </style>
 
-    <style name="albumImageStyle">
+    <style name="searchActivityAlbumImageStyle">
         <item name="android:layout_width">48dp</item>
         <item name="android:layout_height">48dp</item>
+    </style>
+
+    <style name="searchActivityFailureTextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingHorizontal">@dimen/padding_48</item>
+        <item name="android:textSize">@dimen/text_19</item>
+        <item name="android:fontFamily">@font/ys_display_medium</item>
+    </style>
+
+    <style name="searchActivityButtonUpdateStyle" parent="commonSearchActivityStyle">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:fontFamily">@font/ys_display_medium</item>
+        <item name="cornerRadius">@dimen/corner_56</item>
+        <item name="android:textSize">@dimen/text_14</item>
     </style>
 
 </resources>
