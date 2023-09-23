@@ -17,7 +17,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class SearchActivity : AppCompatActivity() {
 
-    private var searchText: String = "" // Глобальная переменная для хранения текста поискового запроса
+    private var searchText: String = "" // Переменная для хранения текста поискового запроса
+    private var lastSearchQuery: String = "" // Переменная для хранения последнего поискового запроса
     private lateinit var binding: ActivitySearchBinding
 
     private val itunesBaseUrl = "https://itunes.apple.com/"
@@ -32,14 +33,12 @@ class SearchActivity : AppCompatActivity() {
     private val adapter = TrackAdapter()
 
     private val callback = object : Callback<TracksResponse> {
-        override fun onResponse(
-            call: Call<TracksResponse>,
-            response: Response<TracksResponse>
-        ) {
-            if (response.code() == 200) {
+        override fun onResponse(call: Call<TracksResponse>, response: Response<TracksResponse>) {
+            if (response.isSuccessful) {
                 tracks.clear()
-                if (response.body()?.results?.isNotEmpty() == true) {
-                    tracks.addAll(response.body()?.results!!)
+                val results = response.body()?.results
+                if (results?.isNotEmpty() == true) {
+                    tracks.addAll(results)
                     showSearchResult(StatusSearch.SUCCESS)
                 }
                 if (tracks.isEmpty()) {
@@ -96,16 +95,20 @@ class SearchActivity : AppCompatActivity() {
 
         binding.inputEditText.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                if (binding.inputEditText.text.isNotEmpty()) {
-                    itunesSearchService.search(binding.inputEditText.text.toString())
-                        .enqueue(callback)
+                val query = binding.inputEditText.text.toString()
+                if (query.isNotEmpty()) {
+                    lastSearchQuery = query // Обновляем lastSearchQuery перед отправкой запроса
+                    itunesSearchService.search(query).enqueue(callback)
                 }
+                hideKeyboard()
                 true
-            }
-            false
+            } else false
         }
+
         binding.buttonUpdate.setOnClickListener {
-            itunesSearchService.search(binding.inputEditText.text.toString()).enqueue(callback)
+            if (lastSearchQuery.isNotEmpty()) {
+                itunesSearchService.search(lastSearchQuery).enqueue(callback)
+            }
         }
     }
 

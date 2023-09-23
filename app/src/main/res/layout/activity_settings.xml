@@ -7,14 +7,14 @@
     android:theme="@style/Theme.PlaylistMaker">
 
     <LinearLayout
-        android:id="@+id/generalHeader"
+        android:id="@+id/general_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         tools:ignore="MissingConstraints">
 
         <Button
-            android:id="@+id/backButtonHeader"
+            android:id="@+id/back_button_header"
             style="@style/settingHeaderButtonStyle"
             app:icon="@drawable/main_setting_light_mode" />
 
