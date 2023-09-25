@@ -4,13 +4,14 @@ import android.content.SharedPreferences
 import com.google.gson.Gson
 
 const val TRACK_LIST_KEY = "track_list_key"
+const val MAX_COUNT = 10
 
 class SearchHistory(val sheredPref: SharedPreferences) {
 
     fun saveTrack(track: Track, trackList: ArrayList<Track>) {
         when {
             trackList.isEmpty() -> trackList.add(0, track)
-            trackList.size == 10 -> {
+            trackList.size == MAX_COUNT -> {
                 if (trackList.contains(track)) {
                     trackList.remove(track)
                     trackList.add(0, track)
@@ -20,7 +21,7 @@ class SearchHistory(val sheredPref: SharedPreferences) {
                 }
             }
 
-            trackList.size < 10 -> {
+            trackList.size < MAX_COUNT -> {
                 trackList.remove(track)
                 trackList.add(0, track)
             }

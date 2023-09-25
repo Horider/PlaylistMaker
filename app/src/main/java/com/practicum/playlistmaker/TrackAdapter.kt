@@ -13,9 +13,7 @@ class TrackAdapter() : RecyclerView.Adapter<TrackViewHolder>() {
     override fun onBindViewHolder(holder: TrackViewHolder, position: Int) {
         holder.bind(tracks[position])
         holder.itemView.setOnClickListener {
-            if (onClickListener != null) {
-                onClickListener!!.onClick(tracks[position])
-            }
+            onClickListener?.onClick(tracks[position])
         }
     }
 

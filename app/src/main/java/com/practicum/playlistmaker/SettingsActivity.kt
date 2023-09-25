@@ -4,6 +4,8 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.practicum.playlistmaker.App.Companion.DARK_THEME_KEY
+import com.practicum.playlistmaker.App.Companion.DARK_THEME_SETTINGS
 import com.practicum.playlistmaker.databinding.ActivitySettingsBinding
 
 class SettingsActivity : AppCompatActivity() {

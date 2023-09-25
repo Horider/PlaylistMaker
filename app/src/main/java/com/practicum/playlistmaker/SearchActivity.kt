@@ -16,9 +16,6 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-const val TRACK_LIST_HISTORY = "track_list_history"
-const val TEXT_KEY = "TEXT_KEY"
-
 class SearchActivity : AppCompatActivity() {
     private var textEditText = ""
     private lateinit var binding: ActivitySearchBinding
@@ -35,9 +32,7 @@ class SearchActivity : AppCompatActivity() {
     private val adapter = TrackAdapter()
     private val historyAdapter = TrackAdapter()
 
-
     private val callback = object: Callback<TracksResponse> {
-
         override fun onResponse(
             call: Call<TracksResponse>,
             response: Response<TracksResponse>
@@ -83,9 +78,11 @@ class SearchActivity : AppCompatActivity() {
             it.hideKeyboard()
             tracks.clear()
             adapter.notifyDataSetChanged()
-            historyAdapter.tracks.clear()
-            historyAdapter.tracks.addAll(searchHistory.getTrackList())
-            historyAdapter.notifyDataSetChanged()
+            with(historyAdapter) {
+                tracks.clear()
+                tracks.addAll(searchHistory.getTrackList())
+                notifyDataSetChanged()
+            }
             binding.placeholder.visibility = View.GONE
             viewButtonRemove(searchHistory.getTrackList())
         }
@@ -114,12 +111,12 @@ class SearchActivity : AppCompatActivity() {
 
         binding.inputEditText.addTextChangedListener(textWatcher)
 
-
         adapter.tracks = tracks
         binding.rvSearchList.adapter = adapter
         adapter.setOnClickListener(object : TrackAdapter.OnClickListener {
             override fun onClick(track: Track) {
                 searchHistory.saveTrack(track, searchHistory.getTrackList())
+                viewButtonRemove(historyAdapter.tracks)
             }
         })
 
@@ -128,9 +125,9 @@ class SearchActivity : AppCompatActivity() {
         historyAdapter.setOnClickListener(object : TrackAdapter.OnClickListener {
             override fun onClick(track: Track) {
                 searchHistory.saveTrack(track, searchHistory.getTrackList())
+                viewButtonRemove(historyAdapter.tracks)
             }
         })
-
 
         binding.inputEditText.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
@@ -156,10 +153,8 @@ class SearchActivity : AppCompatActivity() {
             searchHistory.removeTrackList()
             historyAdapter.tracks.clear()
             historyAdapter.notifyDataSetChanged()
-            binding.buttonRemove.visibility = View.GONE
+            viewButtonRemove(historyAdapter.tracks)
         }
-
-
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -194,7 +189,6 @@ class SearchActivity : AppCompatActivity() {
                 binding.placeholderImage.setImageResource(R.drawable.ic_nothing_found)
                 binding.placeholderText.setText(R.string.nothing_found)
                 binding.buttonUpdate.visibility = View.GONE
-
             }
             StatusSearch.SEARCH_FAILURE -> {
                 adapter.notifyDataSetChanged()
@@ -214,6 +208,11 @@ class SearchActivity : AppCompatActivity() {
     private fun viewButtonRemove (trackList: ArrayList<Track>) {
         binding.buttonRemove.visibility = if (trackList.isNotEmpty() && binding.historySearch.isVisible)
             View.VISIBLE else View.GONE
+        binding.historySearch.visibility = if (trackList.isNotEmpty()) View.VISIBLE else View.GONE
+    }
 
+    private companion object {
+        const val TRACK_LIST_HISTORY = "track_list_history"
+        const val TEXT_KEY = "TEXT_KEY"
     }
 }
