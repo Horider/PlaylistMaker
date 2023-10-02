@@ -1,10 +1,9 @@
 package com.practicum.playlistmaker
 
 import android.app.Application
+import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
-
-const val DARK_THEME_SETTINGS = "dark_theme_settings"
-const val DARK_THEME_KEY = "dark_theme_key"
+import androidx.core.view.isVisible
 
 class App : Application() {
     private var darkTheme = false
@@ -25,5 +24,10 @@ class App : Application() {
                 AppCompatDelegate.MODE_NIGHT_NO
             }
         )
+    }
+
+    companion object {
+        const val DARK_THEME_SETTINGS = "dark_theme_settings"
+        const val DARK_THEME_KEY = "dark_theme_key"
     }
 }
