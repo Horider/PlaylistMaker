@@ -30,6 +30,7 @@
             android:textColor="?attr/colorPrimaryVariant"
             android:textSize="@dimen/text_16"
             android:maxLines="1"
+            android:maxWidth="200dp"
             android:ellipsize="end"
             android:fontFamily="@font/ys_display_regular"
             android:textFontWeight="400"/>

@@ -28,12 +28,13 @@ class PlayerActivity : AppCompatActivity() {
 
     private fun drawLayout(track: Track) {
 
-        binding.trackName.setText(track.trackName)
-        binding.artistName.setText(track.artistName)
-        binding.trackTime.setText(track.formatTime(track.trackTimeMillis))
-        binding.releaseDate.setText(track.getReleaseYear())
-        binding.genreName.setText(track.primaryGenreName)
-        binding.country.setText(track.country)
+        binding.trackName.text = track.trackName
+        binding.artistName.text = track.artistName
+        binding.trackTime.text = track.formatTime(track.trackTimeMillis)  // Этот код уже есть
+        binding.playTime.text = track.formatTime(track.trackTimeMillis)   // Добавьте эту строку
+        binding.releaseDate.text = track.getReleaseYear()
+        binding.genreName.text = track.primaryGenreName
+        binding.country.text = track.country
 
         val itemUrl = track.getCoverArtwork()
         Glide.with(this)
@@ -45,7 +46,7 @@ class PlayerActivity : AppCompatActivity() {
         if (track.collectionName?.isEmpty() == null) {
             binding.albumGroup.visibility = View.GONE
         } else {
-            binding.albumName.setText(track.collectionName)
+            binding.albumName.text = track.collectionName
         }
     }
 }
