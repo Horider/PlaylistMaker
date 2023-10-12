@@ -39,7 +39,7 @@ class PlayerActivity : AppCompatActivity() {
         val itemUrl = track.getCoverArtwork()
         Glide.with(this)
             .load(itemUrl)
-            .placeholder(R.drawable.ic_placeholder_312x312)
+            .placeholder(R.drawable.ic_placeholder_player_activity)
             .transform(RoundedCorners(24))
             .into(binding.imageAlbum)
 

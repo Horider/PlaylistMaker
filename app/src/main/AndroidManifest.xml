@@ -19,7 +19,7 @@
             android:name=".SearchActivity"
             android:exported="false" />
         <activity
-            android:name=".MediatekaActivity"
+            android:name=".MediaLibraryActivity"
             android:exported="false" />
         <activity
             android:name=".SettingsActivity"
