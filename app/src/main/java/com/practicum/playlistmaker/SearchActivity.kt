@@ -1,14 +1,16 @@
 package com.practicum.playlistmaker
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import com.google.gson.Gson
 import com.practicum.playlistmaker.databinding.ActivitySearchBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -16,6 +18,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+const val TRACK_KEY = "track_key"
 class SearchActivity : AppCompatActivity() {
     private var textEditText = ""
     private lateinit var binding: ActivitySearchBinding
@@ -32,14 +35,14 @@ class SearchActivity : AppCompatActivity() {
     private val adapter = TrackAdapter()
     private val historyAdapter = TrackAdapter()
 
-    private val callback = object: Callback<TracksResponse> {
+    private val callback = object : Callback<TracksResponse> {
         override fun onResponse(
             call: Call<TracksResponse>,
             response: Response<TracksResponse>
         ) {
-            if(response.code() == 200) {
+            if (response.code() == 200) {
                 tracks.clear()
-                if (response.body()?.results?.isNotEmpty() == true){
+                if (response.body()?.results?.isNotEmpty() == true) {
                     tracks.addAll(response.body()?.results!!)
                     showSearchResult(StatusSearch.SUCCESS)
                 }
@@ -88,8 +91,9 @@ class SearchActivity : AppCompatActivity() {
         }
 
         binding.inputEditText.setOnFocusChangeListener { v, hasFocus ->
-            binding.historySearch.visibility = if (binding.root.hasFocus() && binding.inputEditText.text?.isEmpty() == true)
-                View.VISIBLE else View.GONE
+            binding.historySearch.visibility =
+                if (binding.root.hasFocus() && binding.inputEditText.text?.isEmpty() == true)
+                    View.VISIBLE else View.GONE
             binding.placeholder.visibility = View.GONE
             viewButtonRemove(searchHistory.getTrackList())
         }
@@ -100,8 +104,9 @@ class SearchActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 binding.buttonClear.visibility = clearButtonVisibility(s)
                 textEditText = binding.inputEditText.text.toString()
-                binding.historySearch.visibility = if (binding.inputEditText.hasFocus() && s?.isEmpty() == true)
-                    View.VISIBLE else View.GONE
+                binding.historySearch.visibility =
+                    if (binding.inputEditText.hasFocus() && s?.isEmpty() == true)
+                        View.VISIBLE else View.GONE
                 binding.placeholder.visibility = View.GONE
                 viewButtonRemove(searchHistory.getTrackList())
             }
@@ -117,6 +122,7 @@ class SearchActivity : AppCompatActivity() {
             override fun onClick(track: Track) {
                 searchHistory.saveTrack(track, searchHistory.getTrackList())
                 viewButtonRemove(historyAdapter.tracks)
+                startPlayer(track)
             }
         })
 
@@ -126,13 +132,15 @@ class SearchActivity : AppCompatActivity() {
             override fun onClick(track: Track) {
                 searchHistory.saveTrack(track, searchHistory.getTrackList())
                 viewButtonRemove(historyAdapter.tracks)
+                startPlayer(track)
             }
         })
 
         binding.inputEditText.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                if (binding.inputEditText.text.isNotEmpty()){
-                    itunesSearchService.search(binding.inputEditText.text.toString()).enqueue(callback)
+                if (binding.inputEditText.text.isNotEmpty()) {
+                    itunesSearchService.search(binding.inputEditText.text.toString())
+                        .enqueue(callback)
                 } else {
                     binding.rvSearchList.visibility = View.GONE
                     historyAdapter.tracks.clear()
@@ -176,12 +184,13 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
-    private fun View.hideKeyboard () {
-        val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+    private fun View.hideKeyboard() {
+        val inputMethodManager =
+            getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
         inputMethodManager?.hideSoftInputFromWindow(windowToken, 0)
     }
 
-    private fun showSearchResult (searchStatus: StatusSearch) {
+    private fun showSearchResult(searchStatus: StatusSearch) {
         when (searchStatus) {
             StatusSearch.EMPTY_SEARCH -> {
                 adapter.notifyDataSetChanged()
@@ -190,6 +199,7 @@ class SearchActivity : AppCompatActivity() {
                 binding.placeholderText.setText(R.string.nothing_found)
                 binding.buttonUpdate.visibility = View.GONE
             }
+
             StatusSearch.SEARCH_FAILURE -> {
                 adapter.notifyDataSetChanged()
                 binding.placeholder.visibility = View.VISIBLE
@@ -197,6 +207,7 @@ class SearchActivity : AppCompatActivity() {
                 binding.placeholderText.setText(R.string.failure_text)
                 binding.buttonUpdate.visibility = View.VISIBLE
             }
+
             StatusSearch.SUCCESS -> {
                 binding.placeholder.visibility = View.GONE
                 binding.rvSearchList.visibility = View.VISIBLE
@@ -205,13 +216,21 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
-    private fun viewButtonRemove (trackList: ArrayList<Track>) {
-        binding.buttonRemove.visibility = if (trackList.isNotEmpty() && binding.historySearch.isVisible)
-            View.VISIBLE else View.GONE
+    private fun viewButtonRemove(trackList: ArrayList<Track>) {
+        binding.buttonRemove.visibility =
+            if (trackList.isNotEmpty() && binding.historySearch.isVisible)
+                View.VISIBLE else View.GONE
         binding.historySearch.visibility = if (trackList.isNotEmpty()) View.VISIBLE else View.GONE
     }
 
-    private companion object {
+    private fun startPlayer (track: Track) {
+        val intent = Intent(this@SearchActivity, PlayerActivity::class.java)
+        val trackToSend = Gson().toJson(track)
+        intent.putExtra(TRACK_KEY, trackToSend)
+        startActivity(intent)
+    }
+
+    companion object {
         const val TRACK_LIST_HISTORY = "track_list_history"
         const val TEXT_KEY = "TEXT_KEY"
     }

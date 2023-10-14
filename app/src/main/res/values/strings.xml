@@ -19,4 +19,17 @@
     <string name="update">Обновить</string>
     <string name="history_search">Вы искали</string>
     <string name="remove_history">Очистить историю</string>
+    <string name="image_album">Лого альбома</string>
+    <string name="label_track_time">Длительность</string>
+    <string name="label_album_name">Альбом</string>
+    <string name="label_release_date">Год</string>
+    <string name="label_genre_name">Жанр</string>
+    <string name="label_country">Страна</string>
+    <string name="button_add">Кнопка добавить</string>
+    <string name="button_play">Кнопка играть</string>
+    <string name="button_like">Кнопка лайк</string>
+    <string name="album_name">Album name</string>
+    <string name="release_date">2023</string>
+    <string name="genre_name">Genre name</string>
+    <string name="country">Country</string>
 </resources>

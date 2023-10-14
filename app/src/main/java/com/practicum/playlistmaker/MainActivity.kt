@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.buttonLibrary.setOnClickListener {
-            startActivity(Intent(this, MediatekaActivity::class.java))
+            startActivity(Intent(this, MediaLibraryActivity::class.java))
         }
 
         binding.buttonSettings.setOnClickListener {
