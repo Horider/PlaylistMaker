@@ -30,8 +30,8 @@ class PlayerActivity : AppCompatActivity() {
 
         binding.trackName.text = track.trackName
         binding.artistName.text = track.artistName
-        binding.trackTime.text = track.formatTime(track.trackTimeMillis)  // Этот код уже есть
-        binding.playTime.text = track.formatTime(track.trackTimeMillis)   // Добавьте эту строку
+        binding.trackTime.text = track.formatTime(track.trackTimeMillis)
+        binding.playTime.text = track.formatTime(track.trackTimeMillis)
         binding.releaseDate.text = track.getReleaseYear()
         binding.genreName.text = track.primaryGenreName
         binding.country.text = track.country
